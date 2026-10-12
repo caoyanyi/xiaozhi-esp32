@@ -54,12 +54,12 @@ int main() {
     assert(std::fabs(StepToward(90.0F, 92.0F, 3.0F) - 92.0F) < 0.001F);
     assert(std::fabs(StepToward(90.0F, 100.0F, 0.0F) - 90.0F) < 0.001F);
 
-    assert(MixDrive(DriveAction::kStop, 80) == MotorOutput{0, 0});
-    assert(MixDrive(DriveAction::kForward, 60) == MotorOutput{60, 60});
-    assert(MixDrive(DriveAction::kBackward, 60) == MotorOutput{-60, -60});
-    assert(MixDrive(DriveAction::kTurnLeft, 60) == MotorOutput{-60, 60});
-    assert(MixDrive(DriveAction::kTurnRight, 60) == MotorOutput{60, -60});
-    assert(MixDrive(DriveAction::kForward, 255) == MotorOutput{100, 100});
+    assert((MixDrive(DriveAction::kStop, 80) == MotorOutput{0, 0}));
+    assert((MixDrive(DriveAction::kForward, 60) == MotorOutput{60, 60}));
+    assert((MixDrive(DriveAction::kBackward, 60) == MotorOutput{-60, -60}));
+    assert((MixDrive(DriveAction::kTurnLeft, 60) == MotorOutput{-60, 60}));
+    assert((MixDrive(DriveAction::kTurnRight, 60) == MotorOutput{60, -60}));
+    assert((MixDrive(DriveAction::kForward, 255) == MotorOutput{100, 100}));
 
     assert(ClampDriveDurationMs(10) == 200);
     assert(ClampDriveDurationMs(1200) == 1200);
