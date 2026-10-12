@@ -1,6 +1,10 @@
 # Wall-E ESP32-S3
 
-中文采购、供电和接线步骤请先阅读：[瓦力 ESP32-S3 接线与电源采购指南](../../../docs/wall-e-s3-wiring-and-power-zh-CN.md)。
+## 中文文档
+
+- [瓦力 ESP32-S3 接线与电源采购指南](../../../docs/wall-e-s3-wiring-and-power-zh-CN.md)
+- [可直接勾选的采购清单](../../../docs/wall-e-s3-purchase-checklist-zh-CN.md)
+- [首次上电与舵机/电机校准检查表](../../../docs/wall-e-s3-bringup-checklist-zh-CN.md)
 
 Custom XiaoZhi board support for an ESP32-S3 N16R8 Wall-E robot using one 128x64 SH1106 OLED,
 a PCA9685 servo controller, and an L298P dual motor driver. Existing microphone, speaker, OLED,

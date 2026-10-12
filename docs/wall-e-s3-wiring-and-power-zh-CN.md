@@ -2,6 +2,11 @@
 
 本文针对当前工程的 `wall-e-s3` 板型，目标硬件为：ESP32-S3 N16R8、1.3 寸 128×64 OLED、PCA9685 舵机扩展板、L298P 双路电机驱动板，以及 MG90S/MG92B 舵机。
 
+配套文档：
+
+- [可直接勾选的采购清单](wall-e-s3-purchase-checklist-zh-CN.md)
+- [首次上电与舵机/电机校准检查表](wall-e-s3-bringup-checklist-zh-CN.md)
+
 先记住三条规则：
 
 1. ESP32、OLED、PCA9685 的逻辑信号可以使用 3.3V；舵机和电机不能由 ESP32 或面包板供电。
@@ -145,6 +150,23 @@ PCA9685 的 `VCC` 只给芯片逻辑供电；8 个舵机的红线全部接在 `V
 
 ### 台式测试方案（推荐先用）
 
+```mermaid
+flowchart TD
+    PSU[5V/15A 封闭式电源] --> FUSE[保险丝]
+    FUSE --> SWITCH[总开关]
+    SWITCH --> DIST[大电流分配端子]
+    DIST --> SERVO[PCA9685 V+ / 舵机电源]
+    DIST --> MOTOR[L298P 电机电源<br/>仅适用于5V电机]
+    USB[USB电源] --> ESP[ESP32-S3]
+    ESP -->|3.3V| PCA_VCC[PCA9685 VCC]
+    ESP -->|GPIO41/42| I2C[OLED + PCA9685 SDA/SCL]
+    ESP -->|GPIO8-13| L298[L298P 控制信号]
+    GND[公共GND星形点] --- ESP
+    GND --- SERVO
+    GND --- MOTOR
+    GND --- L298
+```
+
 ```text
 稳定 5V/15A 电源
         │
@@ -175,6 +197,8 @@ ESP32-S3 可先由 USB 供电；最终整机供电时再使用独立的 5V/3.3V 
 ```
 
 ## 六、首次上电顺序
+
+可打印版本见：[首次上电与校准检查表](wall-e-s3-bringup-checklist-zh-CN.md)。
 
 1. 断开所有电源，检查没有把 PCA9685 `V+` 接到 `VCC` 或 ESP32 3.3V。
 2. 舵机全部拆下舵盘/连杆，电机让车轮离地；L298P 的 ENA/ENB 跳线按需要拆除。
